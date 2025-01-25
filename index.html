@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./index.css" />
+    <title>Teste</title>
+  </head>
+  <body>
+    <div>
+      <input id="nome" type="text" />
+      <input id="idade" type="text" />
+      <input id="elemento3" type="text">
+      <input id="elemento4" type="text">
+      <button id="btn" type="submit">teste</button>
+      <button id="btn2">ver</button>
+    </div>
+    <script>
+   
+      const btn = document.getElementById("btn");
+      const btn2 = document.getElementById("btn2");
+
+      const fonte = document.getElementsByTagName("div");
+
+      btn.addEventListener("click", async () => {
+        event.preventDefault()
+        const tabela = "tb2";
+        const nome = document.getElementById("nome").value;
+        const idade = document.getElementById("idade").value;
+
+        alert("funciona")
+        let partes = [... new Array];
+        partes.push(tabela)
+        partes.push(idade);
+        partes.push(nome);
+        const envio = {tt: partes};
+        try {
+            alert("ok")
+          const resut = await fetch("http://localhost:3000/cadastro", {
+            method:"POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(envio),
+          });
+          alert("uhu");
+        } catch (error) {
+            // alert("pqp")
+          console.log(error);
+        }
+      });
+
+      btn2.addEventListener("click", async()=>{
+        alert("fdp");   
+        const tabela = "tb1";
+        const nome = document.getElementById("nome").value;
+        const idade = document.getElementById("idade").value;
+        const el3 = document.getElementById("elemento3").value;
+        const el4 = document.getElementById("elemento4").value;
+        let partes = [... new Array];
+        // partes.push(tabela);
+        partes.push(nome);
+        partes.push(idade);
+        partes.push(el3);   
+        partes.push(el4);   
+        const envio = {tt: partes};
+
+        try{
+            alert("entrou")
+            const result = await fetch("http://localhost:3000/ver",{
+                method: "POST",
+                headers:{
+                    "Content-Type": "application/json",
+                },
+                body:JSON.stringify(envio)
+            })
+            alert("passou");
+        }
+        catch(error){
+            alert("fudeu");
+            console.log(error)
+        }
+      })
+
+
+    </script>
+  </body>
+</html>
