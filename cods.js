@@ -37,27 +37,33 @@ export const vizualizar = async (valor) => {
   const campo = valor[0];
   const tabela = valor[1];
   const tamanho = valor.length;
+  const teste = tamanho - 1;
     console.log(tamanho)
   let sql = `SELECT ${campo} FROM ${tabela} `;
 
   if (tamanho > 2) {
     sql += "WHERE ";
     for (let i = 2; i < tamanho; i++)   {
-        console.log(i)
-        console.log(sql)
-      if (i != tamanho) {
-        if (valor[i] % 2 != 0) {
-          sql += `${valor[i]} = `;
-        } else {
-          sql += ` ${valor[i]} AND WHERE`;
-        }
-
-
-      } else {
+      console.log(`${i}: `,sql);
+      if (i == tamanho) {
         console.log("fim"); 
-        sql += `${valor}`;
+        sql += ` ${valor[i]}`;
         console.log(sql)
         return sql;
+       
+
+      } else {
+        if (i % 2 == 0) {
+          sql += `${valor[i]} = `;
+        console.log(`Impar ${i}: `,sql)
+
+        }
+        
+        else {
+          sql += `${valor[i]} AND WHERE `;
+        console.log(`Par ${i}: `,sql);
+        }
+
       }
     }
   } else {
